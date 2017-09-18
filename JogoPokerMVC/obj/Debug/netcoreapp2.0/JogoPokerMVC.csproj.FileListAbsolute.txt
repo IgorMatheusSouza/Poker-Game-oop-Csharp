@@ -1,0 +1,11 @@
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\bin\Debug\netcoreapp2.0\JogoPokerMVC.deps.json
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\bin\Debug\netcoreapp2.0\JogoPokerMVC.runtimeconfig.json
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\bin\Debug\netcoreapp2.0\JogoPokerMVC.runtimeconfig.dev.json
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\bin\Debug\netcoreapp2.0\JogoPokerMVC.dll
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\bin\Debug\netcoreapp2.0\JogoPokerMVC.pdb
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\obj\Debug\netcoreapp2.0\JogoPokerMVC.csproj.CoreCompileInputs.cache
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\obj\Debug\netcoreapp2.0\JogoPokerMVC.AssemblyInfoInputs.cache
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\obj\Debug\netcoreapp2.0\JogoPokerMVC.AssemblyInfo.cs
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\obj\Debug\netcoreapp2.0\JogoPokerMVC.dll
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\obj\Debug\netcoreapp2.0\JogoPokerMVC.pdb
+c:\users\igor.dorbação\source\repos\JogoPokerMVC\JogoPokerMVC\obj\Debug\netcoreapp2.0\JogoPokerMVC.csprojResolveAssemblyReference.cache

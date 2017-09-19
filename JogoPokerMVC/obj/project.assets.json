@@ -12542,11 +12542,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "c:\\users\\igor.dorbação\\source\\repos\\JogoPokerMVC\\JogoPokerMVC\\JogoPokerMVC.csproj",
+      "projectUniqueName": "C:\\Users\\igor.dorbação\\source\\repos\\JogoPokerMVC\\JogoPokerMVC\\JogoPokerMVC.csproj",
       "projectName": "JogoPokerMVC",
-      "projectPath": "c:\\users\\igor.dorbação\\source\\repos\\JogoPokerMVC\\JogoPokerMVC\\JogoPokerMVC.csproj",
+      "projectPath": "C:\\Users\\igor.dorbação\\source\\repos\\JogoPokerMVC\\JogoPokerMVC\\JogoPokerMVC.csproj",
       "packagesPath": "C:\\Users\\igor.dorbação\\.nuget\\packages\\",
-      "outputPath": "c:\\users\\igor.dorbação\\source\\repos\\JogoPokerMVC\\JogoPokerMVC\\obj\\",
+      "outputPath": "C:\\Users\\igor.dorbação\\source\\repos\\JogoPokerMVC\\JogoPokerMVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

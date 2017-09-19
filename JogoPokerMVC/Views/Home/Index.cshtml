@@ -1,11 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
+@model JogoPokerMVC.Models.ResultadoFront;
    
-@{foreach (var item in @Model)
+@{int cont = 0;
+    foreach (var item in Model.Cartas)
     {
-        <h2>@item</h2>
-       
+
+
+        <img class="cartas" style="margin:30px" src="~/imgs/@(item).png" />
+        cont++;
+            if (cont == 5) { 
+                <br/>
+        }
     }
-  }
+
+  <h1>@Model.ResultadoString</h1>
+}

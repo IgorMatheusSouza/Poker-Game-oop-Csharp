@@ -9,5 +9,6 @@ namespace JogoPokerMVC.Models
     {
         public String[] Cartas { get; set; }
         public String ResultadoString { get; set; }
+        public String CombinacoesString { get; set; }
     }
 }

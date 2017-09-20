@@ -35,6 +35,10 @@ namespace JogoPokerMVC.Models
             }
             return maos10Cartas;
         }
+
+
+
+
         public int[] ResultadoDasCartas(String[] maos10Cartas)
         {
             //distribuir as cartas e naipes separados 
@@ -43,6 +47,7 @@ namespace JogoPokerMVC.Models
             int[] valorCartasJog2 = new int[5];
             string[] naipeCartasJog2 = new String[5];
 
+            //vetor com os resultados de combicoes e desempate dos dois jogadores
             int[] resultado2Jogadores = new int[4];
 
             for (int i = 0; i < 5; i++)
@@ -68,6 +73,10 @@ namespace JogoPokerMVC.Models
             //retorna um vetor de int com 4 posicoes sendo 0 combinação jogador1, 1 desempate jog1, 2 combinação jog2 e 3 desempate jog2
             return resultado2Jogadores;
         }
+
+
+
+
 
         //Verificar qual é a combinação das mãos
         public int[] ContarPontos(int[] valorJog, String[] naipe)
@@ -105,7 +114,7 @@ namespace JogoPokerMVC.Models
                 resultadoJogador[1] = StraightEFlushDesempate(valorJog);
                 return resultadoJogador;
             }
-            if (Stright(valorJog))
+            if (Straight(valorJog))
             {
                 resultadoJogador[0] = 5;
                 resultadoJogador[1] = StraightEFlushDesempate(valorJog);
@@ -151,16 +160,10 @@ namespace JogoPokerMVC.Models
         }
         public Boolean StrightFlush(String[] naipesCartas, int[] valorCartas)
         {
-            var item = naipesCartas.FirstOrDefault();
-            if (!naipesCartas.Skip(1).All(i => i == item))
+            if (Straight(valorCartas) && Flush(naipesCartas))
+                return true;
+            else
                 return false;
-
-            for (int i = 0; i < valorCartas.Length - 1; i++)
-            {
-                if (!(valorCartas[i] + 1 == valorCartas[i + 1]))
-                    return false;
-            }
-            return true;
         }
         public Boolean FourOfAKind(int[] valorCartas)
         {
@@ -195,12 +198,12 @@ namespace JogoPokerMVC.Models
         }
         public Boolean Flush(String[] naipesCartas)
         {
-            if (!naipesCartas.Skip(1).All(i => i == naipesCartas.FirstOrDefault()))
-                return false;
-            else
+            if (naipesCartas.Skip(1).All(i => i == naipesCartas.FirstOrDefault()))
                 return true;
+            else
+                return false;
         }
-        public Boolean Stright(int[] valorCartas)
+        public Boolean Straight(int[] valorCartas)
         {
             for (int i = 0; i < valorCartas.Length - 1; i++)
             {
@@ -260,29 +263,31 @@ namespace JogoPokerMVC.Models
         }
 
 
+
+
         //Peso das cartas para Desempate
         public int HighCardDesempate(int[] valorCartas)
         {
             return valorCartas.Max(i => i);
         }
         public int OnePairDesempate(int[] valorCartas)
-        {
+        {   
             for (int i = 0; i < valorCartas.Length - 1; i++)
             {
                 if (valorCartas[i] == valorCartas[i + 1])
-                   return valorCartas[i] + valorCartas[i + 1];
+                    return valorCartas[i];
             }
             return 0;
         }
         public int TwoPairDesempate(int[] valorCartas)
         {
-            int pesoDesempate = 0;
-                for (int i = 0; i < valorCartas.Length - 1; i++)
-                {
-                    if (valorCartas[i] == valorCartas[i + 1])
-                        pesoDesempate += valorCartas[i] + valorCartas[i + 1];
-                }
-            return pesoDesempate;
+            for (int i = 4; i > 0; i--)
+            {
+                int duplaAlta = valorCartas[i];
+                if (duplaAlta == valorCartas[i - 1])
+                    return duplaAlta;
+            }
+            return 0;
         }
         public int ThreeOfAKindDesempate(int[] valorCartas)
         {
@@ -290,37 +295,27 @@ namespace JogoPokerMVC.Models
             for (int i = 0; i < valorCartas.Length - 1; i++)
             {
                 if(valorCartas[i] == valorCartas[i + 1])
-                    pesoDesempate += valorCartas[i] + valorCartas[i + 1];
+                    pesoDesempate += valorCartas[i];
             }
             return pesoDesempate;
         }
 
         public int StraightEFlushDesempate(int[] valorCartas)
         {
-            return valorCartas.Sum(i => i);
+            return valorCartas[4];
         }
 
         public int FullhouseDesempate(int[] valorCartas)
         {
-            int pesoDesempate = 0;
-               for (int i = 0; i < valorCartas.Length - 1; i++)
-               {
-                   if(valorCartas[i] == valorCartas[i + 1])
-                       pesoDesempate += valorCartas[i] + valorCartas[i + 1];
-               }
-            return pesoDesempate;
+            return valorCartas[2];
         }
 
         public int FourOfAKindDesempate(int[] valorCartas)
         {
-            int pesoDesempate = 0;
-            for (int i = 0; i < valorCartas.Length - 1; i++)
-            {
-                if (valorCartas[i] == valorCartas[i + 1])
-                    pesoDesempate += valorCartas[i] + valorCartas[i + 1];
-            }
-            return pesoDesempate;
+            return valorCartas[2];
         }
+
+
 
         //Retornar String Com a combinação vitoriosa
         public String RetornoStringFinal(int valorCarta)

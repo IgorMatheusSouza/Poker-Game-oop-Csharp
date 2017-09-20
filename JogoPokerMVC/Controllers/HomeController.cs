@@ -12,41 +12,75 @@ namespace JogoPokerMVC.Controllers
     {
         public IActionResult Index()
         {
-            Jogo pokerGame = new Jogo();
             ResultadoFront resultadoFront = new ResultadoFront();
-
-            resultadoFront.Cartas = pokerGame.gerarCartasDosJogadores();
-            int[] resultado = pokerGame.ResultadoDasCartas(resultadoFront.Cartas);
-
-            if (resultado[0] > resultado[2])
+            resultadoFront.Cartas = new String[10];
+            for (int i = 0; i < resultadoFront.Cartas.Length; i++)
             {
-                resultadoFront.ResultadoString = "O Jogador 1 ganhou com um "+pokerGame.RetornoStringFinal(resultado[0])+" contra um "+ pokerGame.RetornoStringFinal(resultado[2]);
+                if (i < 5)
+                    resultadoFront.Cartas[i] = "backcardRed";
+                else
+                    resultadoFront.Cartas[i] = "backcardBlue";
             }
-            if(resultado[0] < resultado[2])
+            resultadoFront.CombinacoesString = null;
+            return View(resultadoFront);
+        }
+        [HttpPost]
+        public IActionResult Index(String estadoAtual)
+        {
+
+            if (estadoAtual == "Virar cartas")
             {
-                resultadoFront.ResultadoString = "O Jogador 2 ganhou com um " + pokerGame.RetornoStringFinal(resultado[2]) + " contra um " + pokerGame.RetornoStringFinal(resultado[0]);
-            }
-            if (resultado[0] == resultado[2])
-            {
-                    if(resultado[1] > resultado[3])
+                Jogo pokerGame = new Jogo();
+                ResultadoFront resultadoFront = new ResultadoFront();
+
+                resultadoFront.Cartas = pokerGame.gerarCartasDosJogadores();
+
+                int[] resultado = pokerGame.ResultadoDasCartas(resultadoFront.Cartas);
+
+                if (resultado[0] > resultado[2])
+                {
+                    resultadoFront.ResultadoString = "O Jogador 1 ganhou com um " + pokerGame.RetornoStringFinal(resultado[0]);
+                }
+                if (resultado[0] < resultado[2])
+                {
+                    resultadoFront.ResultadoString = "O Jogador 2 ganhou com um " + pokerGame.RetornoStringFinal(resultado[2]);
+                }
+                if (resultado[0] == resultado[2])
+                {
+                    if (resultado[1] > resultado[3])
                     {
-                        resultadoFront.ResultadoString = "O Jogador 1 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor do que a combinação de " + pokerGame.RetornoStringFinal(resultado[0]) + " do jogador 2";
+                        resultadoFront.ResultadoString = "O Jogador 1 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor";
                     }
-                    else if(resultado[1] < resultado[3])
+                    else if (resultado[1] < resultado[3])
                     {
-                        resultadoFront.ResultadoString = "O Jogador 2 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor do que a combinação de " + pokerGame.RetornoStringFinal(resultado[0]) + " do jogador 1";
+                        resultadoFront.ResultadoString = "O Jogador 2 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor";
                     }
-                    else if(resultado[1] == resultado[3])
+                    else if (resultado[1] == resultado[3])
                     {
-                        resultadoFront.ResultadoString = "Impatou com " + pokerGame.RetornoStringFinal(resultado[0]);
+                        resultadoFront.ResultadoString = "Impatou";
                     }
                     else
                     {
-                    resultadoFront.ResultadoString = "Algum erro aconteceu";
+                        resultadoFront.ResultadoString = "Algum erro aconteceu";
                     }
+                }
+                resultadoFront.CombinacoesString = pokerGame.RetornoStringFinal(resultado[0]) + "  Vs  " + pokerGame.RetornoStringFinal(resultado[2]);
+                return View(resultadoFront);
             }
-
-            return View(resultadoFront);
+            else {
+                ResultadoFront resultadoFront = new ResultadoFront();
+                resultadoFront.Cartas = new String[10];
+                for (int i = 0; i < resultadoFront.Cartas.Length; i++)
+                {   
+                    if(i<5)
+                        resultadoFront.Cartas[i] = "backcardRed";
+                    else
+                        resultadoFront.Cartas[i] = "backcardBlue";
+                }
+                resultadoFront.CombinacoesString = null;
+                return View(resultadoFront);
+            }
+          
         }
     }
 }

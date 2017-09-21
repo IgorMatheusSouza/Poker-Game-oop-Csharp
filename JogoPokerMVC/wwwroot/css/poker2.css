@@ -1,0 +1,53 @@
+﻿body {
+    background-color: black;
+    color:white;
+}
+#game-body {
+    background-image:url("../imgs/game_background.jpg");
+    height:600px;
+    border-radius:325px;
+    margin-top:4px;
+    border:thick;
+    border-color:aliceblue;
+}
+#cartas-container {
+    margin-left:210px;
+    display:block;  
+}
+.cartas {
+    width: 100px;
+    height: 150px;
+    margin: 40px 20px 20px 20px;
+    border-radius: 10px;
+}
+.black-backgroung {
+    background-color: black;
+    color: white;
+    border:none;
+    margin:20px auto auto 100px;
+    font-size:20px;
+}
+.black-backgroung:hover {
+        background-color: #161515;
+        color:white;
+}
+
+#txt-vs {
+    margin-left:200px;
+}
+
+@media screen and (max-width: 1199px) {
+
+  
+    #cartas-container {
+        margin-left:18%;
+    }
+
+    .cartas {
+        width: 90px;
+        height: 135px;
+        margin: 40px 10px 10px 10px;
+        border-radius: 10px;
+    }
+
+}

@@ -1,4 +1,5 @@
-﻿body {
+﻿
+body {
     background-color: black;
     color:white;
 }
@@ -7,6 +8,8 @@
     height:600px;
     border-radius:325px;
     margin-top:4px;
+    border:thick;
+    border-color:aliceblue;
 }
 #cartas-container {
     margin-left:210px;
@@ -29,6 +32,23 @@
         background-color: #161515;
         color:white;
 }
+
 #txt-vs {
     margin-left:200px;
+}
+
+@media screen and (max-width: 1199px) {
+
+  
+    #cartas-container {
+        margin-left:18%;
+    }
+
+    .cartas {
+        width: 90px;
+        height: 135px;
+        margin: 40px 10px 10px 10px;
+        border-radius: 10px;
+    }
+
 }

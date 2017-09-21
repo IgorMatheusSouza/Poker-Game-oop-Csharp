@@ -55,6 +55,13 @@ namespace JogoPokerMVC.Controllers
                     {
                         resultadoFront.ResultadoString = "O Jogador 2 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor";
                     }
+                    else if (resultado[1] == resultado[3] && resultado[0] == 1)
+                    {
+                             if (pokerGame.HighCardDesempateSegundaOcorrencia(pokerGame.valorCartasJog1) > pokerGame.HighCardDesempateSegundaOcorrencia(pokerGame.valorCartasJog1))
+                                     resultadoFront.ResultadoString = "O Jogador 1 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor";
+                             else
+                                     resultadoFront.ResultadoString = "O Jogador 2 ganhou com uma combição de " + pokerGame.RetornoStringFinal(resultado[2]) + " melhor";
+                    }
                     else if (resultado[1] == resultado[3])
                     {
                         resultadoFront.ResultadoString = "Impatou";

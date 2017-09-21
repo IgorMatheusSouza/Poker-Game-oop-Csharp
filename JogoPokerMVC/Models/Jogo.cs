@@ -8,8 +8,12 @@ namespace JogoPokerMVC.Models
     public class Jogo
     {
         public List<String> cartas = new List<String>();
-
         public String[] maos10Cartas = new String[10];
+        //distribuir as cartas e naipes separados
+        public int[] valorCartasJog1 = new int[5];
+        public string[] naipeCartasJog1 = new String[5];
+        public int[] valorCartasJog2 = new int[5];
+        public string[] naipeCartasJog2 = new String[5];
 
         public String[] gerarCartasDosJogadores()
         {
@@ -40,12 +44,7 @@ namespace JogoPokerMVC.Models
 
 
         public int[] ResultadoDasCartas(String[] maos10Cartas)
-        {
-            //distribuir as cartas e naipes separados 
-            int[] valorCartasJog1 = new int[5];
-            string[] naipeCartasJog1 = new String[5];
-            int[] valorCartasJog2 = new int[5];
-            string[] naipeCartasJog2 = new String[5];
+        { 
 
             //vetor com os resultados de combicoes e desempate dos dois jogadores
             int[] resultado2Jogadores = new int[4];
@@ -170,13 +169,13 @@ namespace JogoPokerMVC.Models
             int Cont = 0;
             foreach (var item in valorCartas)
             {
-                if (!(item == valorCartas[2]))
+                if ( item == valorCartas[2] )
                     Cont++;
             }
-            if (Cont >= 2)
-                return false;
-            else
+            if (Cont == 4)
                 return true;
+            else
+                return false;
         }
         public Boolean FullHouse(int[] valorCartas)
         {
@@ -207,7 +206,7 @@ namespace JogoPokerMVC.Models
         {
             for (int i = 0; i < valorCartas.Length - 1; i++)
             {
-                if (!(valorCartas[i] + 1 == valorCartas[i + 1]))
+                if ( !(valorCartas[i] + 1 == valorCartas[i + 1]))
                     return false;
             }
             return true;
@@ -313,6 +312,10 @@ namespace JogoPokerMVC.Models
         public int FourOfAKindDesempate(int[] valorCartas)
         {
             return valorCartas[2];
+        }
+        public int HighCardDesempateSegundaOcorrencia(int[] valorCartas)
+        {
+            return valorCartas[3];
         }
 
 

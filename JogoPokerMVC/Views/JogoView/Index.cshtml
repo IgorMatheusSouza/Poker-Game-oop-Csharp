@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model JogoPokerMVC.Models.ResultadoFront;
+
+<div id="game-body">
+    <div id="cartas-container">
+     @{        int cont = 0;
+                    foreach (var item in Model.Cartas)
+                    {
+                        <img class="cartas" src="~/imgs/@(item).png" />
+                               cont++;
+                        if (cont == 5)
+                        {   
+                    
+                            <br />
+                        }
+                    }
+
+            <h2 id="txt-vs">@Model.CombinacoesString</h2>
+            <h3>@Model.ResultadoString</h3>
+
+            <form method="post">
+                    @if (Model.CombinacoesString == null)
+                    {
+                        <input type="submit" class="btn btn-default black-backgroung" name="estadoAtual" value="Virar cartas"/>
+                    }
+                    else
+                    {
+                        <input type="submit" class="btn btn-default black-backgroung" name="estadoAtual" value="Jogar Novamente" />
+                    }
+            </form>
+   }
+        
+    </div>
+</div>

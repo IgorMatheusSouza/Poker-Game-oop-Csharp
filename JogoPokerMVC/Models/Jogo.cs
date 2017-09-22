@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JogoPokerMVC.Models
 {
-    public class Jogo
+    public class Jogo: JogoCombinacoes
     {
         public List<String> cartas = new List<String>();
         public String[] maos10Cartas = new String[10];
@@ -15,10 +15,14 @@ namespace JogoPokerMVC.Models
         public int[] valorCartasJog2 = new int[5];
         public string[] naipeCartasJog2 = new String[5];
 
+        
+
         public String[] gerarCartasDosJogadores()
         {
+            
             //Criar cartas
             String[] naipes = new String[] { "o", "c", "p", "s" };
+
             foreach (var naipe in naipes)
             {
                 for (int i = 2; i <= 14; i++)
@@ -42,9 +46,8 @@ namespace JogoPokerMVC.Models
 
 
 
-
         public int[] ResultadoDasCartas(String[] maos10Cartas)
-        { 
+        {
 
             //vetor com os resultados de combicoes e desempate dos dois jogadores
             int[] resultado2Jogadores = new int[4];
@@ -64,12 +67,15 @@ namespace JogoPokerMVC.Models
 
             //Armazenar o resultado das combinações e o peso para desempate
             int[] resultadoComPeso = ContarPontos(valorCartasJog1, naipeCartasJog1);
-                  resultado2Jogadores[0] = resultadoComPeso[0];
-                  resultado2Jogadores[1] = resultadoComPeso[1];
+
+            resultado2Jogadores[0] = resultadoComPeso[0];
+            resultado2Jogadores[1] = resultadoComPeso[1];
+
             resultadoComPeso = ContarPontos(valorCartasJog2, naipeCartasJog2);
-                  resultado2Jogadores[2] = resultadoComPeso[0];
-                  resultado2Jogadores[3] = resultadoComPeso[1];
-            //retorna um vetor de int com 4 posicoes sendo 0 combinação jogador1, 1 desempate jog1, 2 combinação jog2 e 3 desempate jog2
+
+            resultado2Jogadores[2] = resultadoComPeso[0];
+            resultado2Jogadores[3] = resultadoComPeso[1];
+            //retorna um vetor de int com 4 posicoes sendo posicao[0]=combinação jogador1, posicao[1]= desempate jog1, posicao[2]= combinação jog2 e posicao[3] =desempate jog2
             return resultado2Jogadores;
         }
 
@@ -81,8 +87,9 @@ namespace JogoPokerMVC.Models
         public int[] ContarPontos(int[] valorJog, String[] naipe)
         {
             //Primeira  posição no vetor resultadoJogador equivale ao peso de cada combinacao exemplo RoyalFlush=10, StraightFlush=9 etc.
-            //Segunda posição no vetor resultadoJogado equivale ao peso para desempatar
-            int[] resultadoJogador = new int[] {0,0};
+            //Segunda posição no vetor resultadoJogado equivale ao peso para desempatar exemplo Dupla maior = 9, quadra = 12(dama);
+
+            int[] resultadoJogador = new int[] { 0, 0 };
 
             if (RoyalFlush(naipe, valorJog))
             {
@@ -146,210 +153,6 @@ namespace JogoPokerMVC.Models
         }
 
 
-
-        //verificar combinações
-
-        public Boolean RoyalFlush(String[] naipesCartas, int[] valorCartas)
-        {
-            var item1 = naipesCartas.FirstOrDefault();
-            if (naipesCartas.Skip(1).All(i => i == item1)  && valorCartas.Skip(1).All(i => i >= 10))
-                return true;
-            else
-                return false;
-        }
-        public Boolean StrightFlush(String[] naipesCartas, int[] valorCartas)
-        {
-            if (Straight(valorCartas) && Flush(naipesCartas))
-                return true;
-            else
-                return false;
-        }
-        public Boolean FourOfAKind(int[] valorCartas)
-        {
-            int Cont = 0;
-            foreach (var item in valorCartas)
-            {
-                if ( item == valorCartas[2] )
-                    Cont++;
-            }
-            if (Cont == 4)
-                return true;
-            else
-                return false;
-        }
-        public Boolean FullHouse(int[] valorCartas)
-        {
-            int cont = 0;
-            foreach (var item in valorCartas)
-            {
-                if (item == valorCartas.FirstOrDefault())
-                    cont++;
-            }
-            foreach (var item in valorCartas)
-            {
-                if (item == valorCartas.Last())
-                    cont++;
-            }
-            if (cont == 5)
-                return true;
-            else
-                return false;
-        }
-        public Boolean Flush(String[] naipesCartas)
-        {
-            if (naipesCartas.Skip(1).All(i => i == naipesCartas.FirstOrDefault()))
-                return true;
-            else
-                return false;
-        }
-        public Boolean Straight(int[] valorCartas)
-        {
-            for (int i = 0; i < valorCartas.Length - 1; i++)
-            {
-                if ( !(valorCartas[i] + 1 == valorCartas[i + 1]))
-                    return false;
-            }
-            return true;
-        }
-        public Boolean ThreeOfAKind(int[] valorCartas)
-        {
-            int Cont = 0;
-            foreach (var item in valorCartas)
-            {
-                if (item == valorCartas[2])
-                    Cont++;
-            }
-            if (Cont < 3)
-                return false;
-            else
-                return true;
-        }
-        public Boolean TwoPairs(int[] valorCartas)
-        {
-            int ContPrincipal = 0;
-            foreach (var item in valorCartas)
-            {
-                int cont = 0;
-                foreach (var itemverificado in valorCartas)
-                {
-                    if (item == itemverificado)
-                    {
-                        cont++;
-                    }
-                }
-                if (cont == 2)
-                {
-                    ContPrincipal++;
-                }
-            }
-            if (ContPrincipal == 4)
-                return true;
-            else
-                return false;
-        }
-        public Boolean OnePair(int[] valorCartas)
-        {
-            int cont = 0;
-            for (int i = 0; i < valorCartas.Length - 1; i++)
-            {
-                if (valorCartas[i] == valorCartas[i + 1])
-                    cont++;
-            }
-            if (cont == 1)
-                return true;
-            else
-                return false;
-        }
-
-
-
-
-        //Peso das cartas para Desempate
-        public int HighCardDesempate(int[] valorCartas)
-        {
-            return valorCartas.Max(i => i);
-        }
-        public int OnePairDesempate(int[] valorCartas)
-        {   
-            for (int i = 0; i < valorCartas.Length - 1; i++)
-            {
-                if (valorCartas[i] == valorCartas[i + 1])
-                    return valorCartas[i];
-            }
-            return 0;
-        }
-        public int TwoPairDesempate(int[] valorCartas)
-        {
-            for (int i = 4; i > 0; i--)
-            {
-                int duplaAlta = valorCartas[i];
-                if (duplaAlta == valorCartas[i - 1])
-                    return duplaAlta;
-            }
-            return 0;
-        }
-        public int ThreeOfAKindDesempate(int[] valorCartas)
-        {
-            int pesoDesempate = 0;
-            for (int i = 0; i < valorCartas.Length - 1; i++)
-            {
-                if(valorCartas[i] == valorCartas[i + 1])
-                    pesoDesempate += valorCartas[i];
-            }
-            return pesoDesempate;
-        }
-
-        public int StraightEFlushDesempate(int[] valorCartas)
-        {
-            return valorCartas[4];
-        }
-
-        public int FullhouseDesempate(int[] valorCartas)
-        {
-            return valorCartas[2];
-        }
-
-        public int FourOfAKindDesempate(int[] valorCartas)
-        {
-            return valorCartas[2];
-        }
-        public int HighCardDesempateSegundaOcorrencia(int[] valorCartas)
-        {
-            return valorCartas[3];
-        }
-
-
-
-        //Retornar String Com a combinação vitoriosa
-        public String RetornoStringFinal(int valorCarta)
-        {
-            switch (valorCarta)
-            {
-                case 1:
-                    return "High Card";
-                case 2:
-                    return "One Pair";
-                case 3:
-                    return "Two Pair";
-                case 4:
-                    return "Three of a Kind";
-                case 5:
-                    return "Straight";
-                case 6:
-                    return "Flush";
-                case 7:
-                    return "Full House";
-                case 8:
-                    return "Four Of A Kind";
-                case 9:
-                    return "Straight Flush";
-                case 10:
-                    return "Royal Flush";
-                default:
-                    return "Algo saiu errado.";
-                    
-            }
-        }
     }
 }
-
+        

@@ -95,7 +95,7 @@ namespace JogoPokerMVC.Controllers
     }
 }
 
-
+//testando versionamento
 //Codigo para verificar as combinações mais Raras de acontecer
 /*
 int[] resultado;

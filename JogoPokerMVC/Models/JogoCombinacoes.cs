@@ -9,56 +9,40 @@ namespace JogoPokerMVC.Models
     {
             public Boolean RoyalFlush(String[] naipesCartas, int[] valorCartas)
             {
-                var item1 = naipesCartas.FirstOrDefault();
-                if (naipesCartas.Skip(1).All(i => i == item1) && valorCartas.All(i => i >= 10))
-                    return true;
-                else
-                    return false;
+                 return naipesCartas.Skip(1).All( i => i == naipesCartas.FirstOrDefault()) && valorCartas.All(i => i >= 10);
             }
             public Boolean StrightFlush(String[] naipesCartas, int[] valorCartas)
             {
-                if (Straight(valorCartas) && Flush(naipesCartas))
-                    return true;
-                else
-                    return false;
+                return Straight(valorCartas) && Flush(naipesCartas);
             }
             public Boolean FourOfAKind(int[] valorCartas)
             {
                 int Cont = 0;
-                foreach (var item in valorCartas)
-                {
-                    if (item == valorCartas[2])
-                        Cont++;
-                }
-                if (Cont == 4)
-                    return true;
-                else
-                    return false;
+                    foreach (var item in valorCartas)
+                    {
+                        if (item == valorCartas[2])
+                            Cont++;
+                    }
+                return Cont == 4;
             }
             public Boolean FullHouse(int[] valorCartas)
             {
                 int cont = 0;
-                foreach (var item in valorCartas)
-                {
-                    if (item == valorCartas.FirstOrDefault())
-                        cont++;
-                }
-                foreach (var item in valorCartas)
-                {
-                    if (item == valorCartas.Last())
-                        cont++;
-                }
-                if (cont == 5)
-                    return true;
-                else
-                    return false;
+                    foreach (var item in valorCartas)
+                    {
+                        if (item == valorCartas.FirstOrDefault())
+                            cont++;
+                    }
+                    foreach (var item in valorCartas)
+                    {
+                        if (item == valorCartas.Last())
+                            cont++;
+                    }
+                return cont == 5;
             }
             public Boolean Flush(String[] naipesCartas)
             {
-                if (naipesCartas.Skip(1).All(i => i == naipesCartas.FirstOrDefault()))
-                    return true;
-                else
-                    return false;
+                return naipesCartas.Skip(1).All(i => i == naipesCartas.FirstOrDefault());
             }
             public Boolean Straight(int[] valorCartas)
             {
@@ -72,15 +56,12 @@ namespace JogoPokerMVC.Models
             public Boolean ThreeOfAKind(int[] valorCartas)
             {
                 int Cont = 0;
-                foreach (var item in valorCartas)
-                {
-                    if (item == valorCartas[2])
-                        Cont++;
-                }
-                if (Cont < 3)
-                    return false;
-                else
-                    return true;
+                    foreach (var item in valorCartas)
+                    {
+                        if (item == valorCartas[2])
+                            Cont++;
+                    }
+                return Cont > 3;
             }
             public Boolean TwoPairs(int[] valorCartas)
             {
@@ -100,23 +81,17 @@ namespace JogoPokerMVC.Models
                         ContPrincipal++;
                     }
                 }
-                if (ContPrincipal == 4)
-                    return true;
-                else
-                    return false;
+                return ContPrincipal == 4;
             }
             public Boolean OnePair(int[] valorCartas)
             {
                 int cont = 0;
-                for (int i = 0; i < valorCartas.Length - 1; i++)
-                {
-                    if (valorCartas[i] == valorCartas[i + 1])
-                        cont++;
-                }
-                if (cont == 1)
-                    return true;
-                else
-                    return false;
+                    for (int i = 0; i < valorCartas.Length - 1; i++)
+                    {
+                        if (valorCartas[i] == valorCartas[i + 1])
+                            cont++;
+                    }
+                return (cont == 1) ? true : false ;
             }
 
 
